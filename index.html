@@ -13,6 +13,10 @@
     <title>I am Sandy</title>
 
     <style>
+        /* =========================
+           BASIC RESET
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
@@ -26,7 +30,6 @@
             background: #ffffff;
             color: #000000;
             font-family: Arial, Helvetica, sans-serif;
-
             overflow-x: hidden;
         }
 
@@ -34,7 +37,9 @@
             min-height: 100dvh;
         }
 
-        /* ================= PAGE ================= */
+        /* =========================
+           MAIN PAGE
+        ========================= */
 
         .page {
             width: 100%;
@@ -44,26 +49,33 @@
             flex-direction: column;
             align-items: center;
 
-            padding: clamp(20px, 4vw, 55px);
+            padding: clamp(18px, 4vw, 50px);
 
-            gap: clamp(20px, 4vh, 45px);
+            gap: clamp(18px, 4vh, 40px);
 
             position: relative;
+            overflow: hidden;
         }
 
-        /* ================= TITLE ================= */
+        /* =========================
+           TITLE
+        ========================= */
 
         .title {
             text-align: center;
-            z-index: 2;
+            position: relative;
+            z-index: 5;
 
             animation: titleIn 1s ease both;
         }
 
         .title h1 {
-            font-size: clamp(42px, 7vw, 85px);
+            font-size: clamp(42px, 7vw, 82px);
+
             line-height: 1;
+
             font-weight: 800;
+
             letter-spacing: -3px;
 
             color: #000000;
@@ -77,98 +89,125 @@
 
             margin-top: 10px;
 
-            font-size: clamp(20px, 3vw, 34px);
+            font-size: clamp(19px, 3vw, 32px);
+
             letter-spacing: 6px;
+
+            font-weight: 500;
 
             color: #222222;
         }
 
-        /* ================= HEADER IMAGE ================= */
+        /* =========================
+           HEADER IMAGE
+        ========================= */
 
         .header-wrapper {
-            width: min(1584px, 96vw);
+            /*
+                الصورة متصغرة تقريبًا 45%
+                من العرض الأصلي.
+            */
+
+            width: min(713px, 45vw);
 
             position: relative;
 
-            border-radius: clamp(18px, 3vw, 35px);
-
             overflow: hidden;
+
+            border-radius: clamp(18px, 3vw, 30px);
 
             background: #ffffff;
 
             border: 1px solid rgba(0, 0, 0, 0.10);
 
             box-shadow:
-                0 25px 70px rgba(0, 0, 0, 0.12),
+                0 25px 65px rgba(0, 0, 0, 0.12),
                 0 5px 20px rgba(0, 0, 0, 0.06);
 
-            animation: imageIn 1.2s cubic-bezier(.2,.8,.2,1) both;
+            animation:
+                imageIn 1.2s cubic-bezier(.2,.8,.2,1) both;
         }
 
         /*
-            مهم جدًا:
-            الصورة هنا ليست background.
-            لذلك لن يتم قصها.
+            الصورة نفسها هي اللي بتتحكم في الارتفاع.
+            مفيش background-size: cover
+            وبالتالي مفيش قص للصورة.
         */
 
         .header-wrapper img {
             display: block;
 
             width: 100%;
+
             height: auto;
 
             max-width: 100%;
 
             object-fit: contain;
 
-            vertical-align: middle;
+            opacity: 1;
 
-            /* ممنوع أي طبقة فوق الصورة */
             filter: none;
 
-            opacity: 1;
+            vertical-align: middle;
         }
 
-        /* Glass reflection فقط على الحواف،
-           وليس فوق الصورة */
+        /*
+            Glass effect على الحواف فقط
+            بدون طبقة بيضاء فوق الصورة.
+        */
 
-        .header-wrapper .glass-edge {
+        .glass-edge {
             position: absolute;
+
             inset: 0;
 
             pointer-events: none;
 
             border-radius: inherit;
 
-            border: 1px solid rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.65);
 
             box-shadow:
-                inset 0 1px 0 rgba(255,255,255,0.75);
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
 
             z-index: 2;
         }
 
-        /* ================= TEXT ================= */
+        /* =========================
+           TEXT GLASS CARD
+        ========================= */
 
         .text-card {
             width: min(900px, 94vw);
 
-            padding: clamp(25px, 4vw, 45px);
+            padding:
+                clamp(24px, 4vw, 45px);
 
             text-align: center;
 
-            background: rgba(255, 255, 255, 0.72);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.82),
+                    rgba(255, 255, 255, 0.55)
+                );
 
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
+            backdrop-filter: blur(25px);
+
+            -webkit-backdrop-filter: blur(25px);
 
             border: 1px solid rgba(0, 0, 0, 0.08);
 
             border-radius: clamp(22px, 4vw, 38px);
 
             box-shadow:
-                0 25px 65px rgba(0, 0, 0, 0.08),
-                inset 0 1px 0 rgba(255,255,255,0.9);
+                0 25px 65px rgba(0, 0, 0, 0.09),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+            position: relative;
+
+            z-index: 3;
 
             animation: textIn 1.4s ease both;
         }
@@ -181,148 +220,192 @@
             color: #000000;
         }
 
-        /* ================= GLASS CIRCLES ================= */
+        /* =========================
+           GLASS DECORATIONS
+        ========================= */
 
         .glass-circle {
-            position: fixed;
+            position: absolute;
 
             border-radius: 50%;
 
-            background: rgba(255,255,255,0.45);
+            background: rgba(255, 255, 255, 0.55);
 
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
 
             box-shadow:
-                0 20px 50px rgba(0,0,0,0.06);
+                0 20px 50px rgba(0, 0, 0, 0.07);
 
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
+
+            -webkit-backdrop-filter: blur(15px);
 
             pointer-events: none;
 
-            z-index: 0;
+            z-index: 1;
         }
 
         .circle-one {
-            width: clamp(80px, 10vw, 150px);
-            height: clamp(80px, 10vw, 150px);
+            width: clamp(70px, 9vw, 140px);
 
-            left: -40px;
+            height: clamp(70px, 9vw, 140px);
+
+            left: -35px;
+
             top: 25%;
 
-            animation: floatOne 7s ease-in-out infinite;
+            animation:
+                floatOne 7s ease-in-out infinite;
         }
 
         .circle-two {
             width: clamp(60px, 8vw, 120px);
+
             height: clamp(60px, 8vw, 120px);
 
             right: -30px;
+
             bottom: 15%;
 
-            animation: floatTwo 8s ease-in-out infinite;
+            animation:
+                floatTwo 8s ease-in-out infinite;
         }
 
-        /* ================= ANIMATIONS ================= */
+        /* =========================
+           ANIMATIONS
+        ========================= */
 
         @keyframes titleIn {
+
             from {
                 opacity: 0;
-                transform: translateY(-25px);
+
+                transform:
+                    translateY(-25px)
+                    scale(0.95);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+
+                transform:
+                    translateY(0)
+                    scale(1);
             }
         }
 
         @keyframes imageIn {
+
             from {
                 opacity: 0;
-                transform: scale(0.96);
+
+                transform:
+                    scale(0.92);
             }
 
             to {
                 opacity: 1;
-                transform: scale(1);
+
+                transform:
+                    scale(1);
             }
         }
 
         @keyframes textIn {
+
             from {
                 opacity: 0;
-                transform: translateY(25px);
+
+                transform:
+                    translateY(25px)
+                    scale(0.97);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+
+                transform:
+                    translateY(0)
+                    scale(1);
             }
         }
 
         @keyframes floatOne {
-            0%, 100% {
-                transform: translate(0, 0);
+
+            0%,
+            100% {
+                transform:
+                    translate(0, 0);
             }
 
             50% {
-                transform: translate(30px, 35px);
+                transform:
+                    translate(30px, 35px);
             }
         }
 
         @keyframes floatTwo {
-            0%, 100% {
-                transform: translate(0, 0);
+
+            0%,
+            100% {
+                transform:
+                    translate(0, 0);
             }
 
             50% {
-                transform: translate(-25px, -30px);
+                transform:
+                    translate(-25px, -30px);
             }
         }
 
-        /* ================= MOBILE ================= */
+        /* =========================
+           MOBILE
+        ========================= */
 
         @media (max-width: 600px) {
 
             .page {
-                padding: 18px 12px 25px;
+                padding:
+                    18px 12px 25px;
 
                 gap: 22px;
             }
 
             .title h1 {
-                font-size: clamp(40px, 12vw, 58px);
+                font-size:
+                    clamp(40px, 12vw, 58px);
 
-                letter-spacing: -2px;
+                letter-spacing:
+                    -2px;
             }
 
             .name {
-                font-size: 19px;
+                font-size: 18px;
 
                 letter-spacing: 4px;
             }
 
-            .header-wrapper {
-                width: 100%;
-
-                border-radius: 20px;
-            }
-
             /*
-                نفس نسبة الصورة الأصلية.
-                لا قص ولا zoom ولا background.
+                على الموبايل ندي الصورة مساحة أكبر
+                لكن تفضل محافظة على أبعادها
+                ومفيش قص.
             */
+
+            .header-wrapper {
+                width: min(92vw, 713px);
+            }
 
             .header-wrapper img {
                 width: 100%;
+
                 height: auto;
             }
 
             .text-card {
                 width: 100%;
 
-                padding: 25px 20px;
+                padding:
+                    25px 20px;
 
                 border-radius: 25px;
             }
@@ -334,12 +417,15 @@
             }
         }
 
-        /* ================= VERY SMALL PHONES ================= */
+        /* =========================
+           VERY SMALL PHONES
+        ========================= */
 
         @media (max-width: 380px) {
 
             .page {
                 padding-top: 14px;
+
                 gap: 17px;
             }
 
@@ -348,15 +434,62 @@
             }
 
             .name {
-                font-size: 17px;
+                font-size: 16px;
+            }
+
+            .header-wrapper {
+                width: 90vw;
             }
 
             .text-card {
-                padding: 20px 16px;
+                padding:
+                    20px 16px;
             }
 
             .text-card p {
                 font-size: 15px;
+
+                line-height: 1.65;
+            }
+        }
+
+        /* =========================
+           SHORT SCREENS
+        ========================= */
+
+        @media (max-height: 650px) {
+
+            .page {
+                padding-top: 12px;
+                padding-bottom: 15px;
+
+                gap: 15px;
+            }
+
+            .title h1 {
+                font-size:
+                    clamp(32px, 6vw, 55px);
+            }
+
+            .name {
+                margin-top: 5px;
+
+                font-size: 16px;
+            }
+
+            .header-wrapper {
+                width: min(713px, 45vw);
+            }
+
+            .text-card {
+                padding:
+                    16px 22px;
+            }
+
+            .text-card p {
+                font-size: 14px;
+
+                line-height: 1.5;
             }
         }
     </style>
@@ -366,25 +499,41 @@
 
     <div class="page">
 
+        <!-- Glass Decorations -->
+
         <div class="glass-circle circle-one"></div>
+
         <div class="glass-circle circle-two"></div>
 
-        <!-- TITLE -->
+
+        <!-- Title -->
+
         <section class="title">
+
             <h1>I am Sandy</h1>
-            <span class="name">Sandy</span>
+
+            <span class="name">
+                Sandy
+            </span>
+
         </section>
 
-        <!-- HEADER IMAGE -->
+
+        <!-- Header -->
+
         <div class="header-wrapper">
 
-            <img src="1.jpg" alt="Sandy Header">
+            <img
+                src="1.jpg"
+                alt="Sandy Header">
 
             <div class="glass-edge"></div>
 
         </div>
 
-        <!-- TEXT -->
+
+        <!-- About Text -->
+
         <section class="text-card">
 
             <p>
