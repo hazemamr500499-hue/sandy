@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,226 +22,205 @@
         html,
         body {
             width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #fff;
-            color: #000;
+            min-height: 100%;
+            background: #ffffff;
+            color: #000000;
             font-family: Arial, Helvetica, sans-serif;
+
+            overflow-x: hidden;
         }
 
         body {
             min-height: 100dvh;
         }
 
-        /* ================= MAIN PAGE ================= */
+        /* ================= PAGE ================= */
 
         .page {
             width: 100%;
-            height: 100dvh;
             min-height: 100dvh;
 
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-evenly;
 
-            padding:
-                clamp(12px, 2vh, 30px)
-                clamp(15px, 5vw, 70px);
+            padding: clamp(20px, 4vw, 55px);
+
+            gap: clamp(20px, 4vh, 45px);
 
             position: relative;
-            overflow: hidden;
         }
 
         /* ================= TITLE ================= */
 
         .title {
             text-align: center;
-            flex-shrink: 1;
             z-index: 2;
 
-            animation: titleIn 1s ease forwards;
+            animation: titleIn 1s ease both;
         }
 
         .title h1 {
-            font-size: clamp(42px, 7vw, 82px);
-            line-height: 0.95;
+            font-size: clamp(42px, 7vw, 85px);
+            line-height: 1;
             font-weight: 800;
             letter-spacing: -3px;
 
-            color: #000;
+            color: #000000;
 
             text-shadow:
                 0 8px 25px rgba(0, 0, 0, 0.10);
         }
 
-        .title .name {
+        .name {
             display: block;
 
-            margin-top: clamp(8px, 1.5vh, 18px);
+            margin-top: 10px;
 
             font-size: clamp(20px, 3vw, 34px);
-            font-weight: 500;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
 
-            color: #222;
-
-            animation: nameFloat 4s ease-in-out infinite;
+            color: #222222;
         }
 
         /* ================= HEADER IMAGE ================= */
 
-        .header-glass {
-            width: min(1100px, 94vw);
-
-            height: clamp(150px, 30vh, 300px);
+        .header-wrapper {
+            width: min(1584px, 96vw);
 
             position: relative;
+
+            border-radius: clamp(18px, 3vw, 35px);
+
             overflow: hidden;
 
-            border-radius: clamp(22px, 4vw, 40px);
-
-            background-image: url("1.jpg");
-            background-size: cover;
-            background-position: center;
+            background: #ffffff;
 
             border: 1px solid rgba(0, 0, 0, 0.10);
 
             box-shadow:
-                0 25px 70px rgba(0, 0, 0, 0.13),
-                inset 0 1px 0 rgba(255,255,255,0.9);
+                0 25px 70px rgba(0, 0, 0, 0.12),
+                0 5px 20px rgba(0, 0, 0, 0.06);
 
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            transform: perspective(1000px) rotateX(0deg);
-
-            animation:
-                headerIn 1.2s ease forwards,
-                headerFloat 6s ease-in-out infinite 1.2s;
-
-            flex-shrink: 1;
+            animation: imageIn 1.2s cubic-bezier(.2,.8,.2,1) both;
         }
 
-        /* Glass overlay */
+        /*
+            مهم جدًا:
+            الصورة هنا ليست background.
+            لذلك لن يتم قصها.
+        */
 
-        .header-glass::before {
-            content: "";
+        .header-wrapper img {
+            display: block;
+
+            width: 100%;
+            height: auto;
+
+            max-width: 100%;
+
+            object-fit: contain;
+
+            vertical-align: middle;
+
+            /* ممنوع أي طبقة فوق الصورة */
+            filter: none;
+
+            opacity: 1;
+        }
+
+        /* Glass reflection فقط على الحواف،
+           وليس فوق الصورة */
+
+        .header-wrapper .glass-edge {
             position: absolute;
             inset: 0;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(255,255,255,0.38),
-                    rgba(255,255,255,0.05)
-                );
+            pointer-events: none;
 
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            border-radius: inherit;
+
+            border: 1px solid rgba(255, 255, 255, 0.55);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.75);
+
+            z-index: 2;
         }
 
-        /* Glass reflection */
+        /* ================= TEXT ================= */
 
-        .header-glass::after {
-            content: "";
+        .text-card {
+            width: min(900px, 94vw);
 
-            position: absolute;
-
-            width: 160%;
-            height: 50%;
-
-            top: -10%;
-            left: -30%;
-
-            background: rgba(255,255,255,0.30);
-
-            transform: rotate(-8deg);
-
-            filter: blur(25px);
-
-            animation: glassShine 5s ease-in-out infinite;
-        }
-
-        /* ================= TEXT CARD ================= */
-
-        .text-glass {
-            width: min(850px, 94vw);
-
-            padding:
-                clamp(18px, 3vh, 35px)
-                clamp(20px, 5vw, 55px);
+            padding: clamp(25px, 4vw, 45px);
 
             text-align: center;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(255,255,255,0.85),
-                    rgba(255,255,255,0.55)
-                );
+            background: rgba(255, 255, 255, 0.72);
 
-            border: 1px solid rgba(0,0,0,0.08);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            border: 1px solid rgba(0, 0, 0, 0.08);
 
             border-radius: clamp(22px, 4vw, 38px);
 
             box-shadow:
-                0 20px 60px rgba(0,0,0,0.09),
-                inset 0 1px 0 rgba(255,255,255,1);
+                0 25px 65px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255,255,255,0.9);
 
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-
-            animation: textIn 1.4s ease forwards;
-
-            flex-shrink: 1;
+            animation: textIn 1.4s ease both;
         }
 
-        .text-glass p {
-            font-size: clamp(14px, 2vw, 21px);
-            line-height: 1.65;
+        .text-card p {
+            font-size: clamp(16px, 2vw, 21px);
 
-            color: #000;
+            line-height: 1.75;
+
+            color: #000000;
         }
 
-        /* ================= DECORATION ================= */
+        /* ================= GLASS CIRCLES ================= */
 
-        .orb {
-            position: absolute;
+        .glass-circle {
+            position: fixed;
 
             border-radius: 50%;
 
-            background: rgba(255,255,255,0.65);
+            background: rgba(255,255,255,0.45);
 
             border: 1px solid rgba(0,0,0,0.05);
 
             box-shadow:
-                0 15px 45px rgba(0,0,0,0.06);
+                0 20px 50px rgba(0,0,0,0.06);
 
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
 
             pointer-events: none;
+
+            z-index: 0;
         }
 
-        .orb.one {
-            width: clamp(70px, 10vw, 150px);
-            height: clamp(70px, 10vw, 150px);
+        .circle-one {
+            width: clamp(80px, 10vw, 150px);
+            height: clamp(80px, 10vw, 150px);
 
-            left: -30px;
-            top: 18%;
+            left: -40px;
+            top: 25%;
 
-            animation: orbOne 7s ease-in-out infinite;
+            animation: floatOne 7s ease-in-out infinite;
         }
 
-        .orb.two {
-            width: clamp(55px, 8vw, 120px);
-            height: clamp(55px, 8vw, 120px);
+        .circle-two {
+            width: clamp(60px, 8vw, 120px);
+            height: clamp(60px, 8vw, 120px);
 
-            right: -25px;
+            right: -30px;
             bottom: 15%;
 
-            animation: orbTwo 8s ease-in-out infinite;
+            animation: floatTwo 8s ease-in-out infinite;
         }
 
         /* ================= ANIMATIONS ================= */
@@ -250,163 +228,135 @@
         @keyframes titleIn {
             from {
                 opacity: 0;
-                transform: translateY(-25px) scale(0.94);
+                transform: translateY(-25px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        @keyframes nameFloat {
-            0%, 100% {
                 transform: translateY(0);
             }
-
-            50% {
-                transform: translateY(-4px);
-            }
         }
 
-        @keyframes headerIn {
+        @keyframes imageIn {
             from {
                 opacity: 0;
-                transform:
-                    perspective(1000px)
-                    rotateX(12deg)
-                    scale(0.94);
+                transform: scale(0.96);
             }
 
             to {
                 opacity: 1;
-                transform:
-                    perspective(1000px)
-                    rotateX(0)
-                    scale(1);
-            }
-        }
-
-        @keyframes headerFloat {
-            0%, 100% {
-                transform:
-                    perspective(1000px)
-                    translateY(0);
-            }
-
-            50% {
-                transform:
-                    perspective(1000px)
-                    translateY(-5px);
+                transform: scale(1);
             }
         }
 
         @keyframes textIn {
             from {
                 opacity: 0;
-                transform:
-                    translateY(25px)
-                    scale(0.96);
+                transform: translateY(25px);
             }
 
             to {
                 opacity: 1;
-                transform:
-                    translateY(0)
-                    scale(1);
+                transform: translateY(0);
             }
         }
 
-        @keyframes glassShine {
-            0% {
-                transform: translateX(-30%) rotate(-8deg);
-            }
-
-            50% {
-                transform: translateX(35%) rotate(-8deg);
-            }
-
-            100% {
-                transform: translateX(-30%) rotate(-8deg);
-            }
-        }
-
-        @keyframes orbOne {
+        @keyframes floatOne {
             0%, 100% {
                 transform: translate(0, 0);
             }
 
             50% {
-                transform: translate(35px, 45px);
+                transform: translate(30px, 35px);
             }
         }
 
-        @keyframes orbTwo {
+        @keyframes floatTwo {
             0%, 100% {
                 transform: translate(0, 0);
             }
 
             50% {
-                transform: translate(-30px, -35px);
+                transform: translate(-25px, -30px);
             }
         }
 
-        /* ================= SMALL PHONES ================= */
+        /* ================= MOBILE ================= */
 
-        @media (max-height: 650px) {
+        @media (max-width: 600px) {
 
             .page {
-                justify-content: space-around;
-                padding-top: 8px;
-                padding-bottom: 8px;
+                padding: 18px 12px 25px;
+
+                gap: 22px;
             }
 
             .title h1 {
-                font-size: clamp(34px, 7vw, 55px);
+                font-size: clamp(40px, 12vw, 58px);
+
+                letter-spacing: -2px;
             }
 
-            .title .name {
-                font-size: 18px;
-                margin-top: 5px;
+            .name {
+                font-size: 19px;
+
+                letter-spacing: 4px;
             }
 
-            .header-glass {
-                height: 24vh;
+            .header-wrapper {
+                width: 100%;
+
+                border-radius: 20px;
             }
 
-            .text-glass {
-                padding: 15px 20px;
+            /*
+                نفس نسبة الصورة الأصلية.
+                لا قص ولا zoom ولا background.
+            */
+
+            .header-wrapper img {
+                width: 100%;
+                height: auto;
             }
 
-            .text-glass p {
-                font-size: 13px;
-                line-height: 1.45;
+            .text-card {
+                width: 100%;
+
+                padding: 25px 20px;
+
+                border-radius: 25px;
+            }
+
+            .text-card p {
+                font-size: 16px;
+
+                line-height: 1.7;
             }
         }
 
         /* ================= VERY SMALL PHONES ================= */
 
-        @media (max-height: 500px) {
+        @media (max-width: 380px) {
+
+            .page {
+                padding-top: 14px;
+                gap: 17px;
+            }
 
             .title h1 {
-                font-size: 30px;
+                font-size: 38px;
             }
 
-            .title .name {
+            .name {
+                font-size: 17px;
+            }
+
+            .text-card {
+                padding: 20px 16px;
+            }
+
+            .text-card p {
                 font-size: 15px;
-            }
-
-            .header-glass {
-                height: 22vh;
-            }
-
-            .text-glass {
-                padding: 10px 15px;
-            }
-
-            .text-glass p {
-                font-size: 12px;
-                line-height: 1.35;
             }
         }
     </style>
@@ -416,30 +366,37 @@
 
     <div class="page">
 
-        <div class="orb one"></div>
-        <div class="orb two"></div>
+        <div class="glass-circle circle-one"></div>
+        <div class="glass-circle circle-two"></div>
 
-        <!-- Title -->
+        <!-- TITLE -->
         <section class="title">
             <h1>I am Sandy</h1>
             <span class="name">Sandy</span>
         </section>
 
-        <!-- Header Image -->
-        <div class="header-glass"></div>
+        <!-- HEADER IMAGE -->
+        <div class="header-wrapper">
 
-        <!-- Text -->
-        <section class="text-glass">
+            <img src="1.jpg" alt="Sandy Header">
+
+            <div class="glass-edge"></div>
+
+        </div>
+
+        <!-- TEXT -->
+        <section class="text-card">
+
             <p>
                 I love my friends so much.
                 I am very loyal to them and I truly care about every one of them.
                 I love all my friends and appreciate every moment we spend together.
                 They make my life happier, and I will always support and care for them.
             </p>
+
         </section>
 
     </div>
 
 </body>
 </html>
-```
